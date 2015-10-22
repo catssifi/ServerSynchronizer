@@ -1,0 +1,15 @@
+{
+  "connection": {
+    "login": "login",
+    "password": "password",
+    "url": "host"
+  },
+  "sourceRoot": "/home/user/files/",
+  "destinationRoot": "/remoteHost/files/",
+  "files": [
+    "fileToSynchronize"
+  ],
+  "directories": [
+    "directoryToSynchronize"
+  ]
+}
