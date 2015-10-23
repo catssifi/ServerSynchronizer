@@ -31,7 +31,7 @@ You can run all test cases with this command:
 
 ###### Related Articles 
 
-<a href="https://wwken.wordpress.com/2015/10/23/serversynchronizer-the-software-that-synchronizes-all-the-files-from-a-local-server-to-all-remote-servers/" target="_blank">Serversynchronizer-the-software-that-synchronizes-all-the-files-from-a-local-server-to-all-remote-servers</a>
+<a href="https://wwken.wordpress.com/2015/10/23/serversynchronizer-the-software-that-synchronizes-all-the-files-from-a-local-server-to-all-remote-servers/" target="_blank">ServerSynchronizer – the software that synchronizes all the files from a local server to all remote server(s)</a>
 
 
 
