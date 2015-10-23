@@ -11,7 +11,7 @@ For more details and use case, check it out here at <a href="https://wwken.wordp
 
 #### Prerequisites
 
-1) This software has been fully developed and built and run in Mac OS X and Linux Ubuntu 14.10.  It should work in future versions.
+1) This software has been fully developed and built and run on Mac OS X and Linux Ubuntu 14.10.  It should work in future versions.
 
 2) To build the application you need [sbt](http://www.scala-sbt.org/). You can download it from [http://www.scala-sbt.org/download.html](http://www.scala-sbt.org/download.html) website, or you can just find sbt in your favourite package manager (`apt-get`, `yum` or other).
 
