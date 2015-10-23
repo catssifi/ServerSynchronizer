@@ -4,8 +4,8 @@
     "login": "ubuntu",
     "keyfile": "/Users/ken/.ssh/kenWorkMachine.rsa"
   },
-  "sourceRoot": "/Users/ken/workspace/py_try",
-  "destinationRoot": "/opt/localresponse/py_try",
+  "sourceRoot": "/Users/ken/workspace/sparkProjectSrc",
+  "destinationRoot": "/opt/sparkDeployFolder",
   "refreshIntervalInSeconds": 2,
   "fileTypesToBeWatched": ["*.scala","*.java","*.py", "*.txt"]
 }
