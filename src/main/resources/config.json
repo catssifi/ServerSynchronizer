@@ -1,0 +1,13 @@
+{
+  "connection": {
+    "hostname": "<THE REMOTE HOST NAME>",
+    "login": "<THE LOGIN USER>",
+    "keyfile": "<THE LOCATION OF THE SSH KEY-FILE>"
+  },
+  "sourceRoot": "<THE PATH TO THE ROOT OF THE SOURCE FOLDER IN YOUR SOURCE SERVER>",
+  "destinationRoot": "<THE PATH TO THE REMOTE OF THE DESTINATION SERVER>",
+  "refreshIntervalInSeconds": <THE NUMBER OF SECONDS YOU WANT TO PERFORM THE SERVERSYNCHRONIZATION>,
+  "fileTypesToBeWatched": [<LIST OF THE FILE EXTENSIONS TO BE WATCHED>]
+}
+
+

@@ -1,5 +1,5 @@
 name := "ServerSynchronizer"
-
+version := "1.0"
 enablePlugins(GitVersioning)
 git.useGitDescribe := true
 

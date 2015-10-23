@@ -1,0 +1,14 @@
+{
+  "connection": {
+    "hostname": "iq-spark",
+    "login": "ubuntu",
+    "keyfile": "/Users/ken/.ssh/kenWorkMachine.rsa"
+  },
+  "sourceRoot": "/Users/ken/workspace/py_try",
+  "destinationRoot": "/opt/localresponse/py_try",
+  "refreshIntervalInSeconds": 2,
+  "fileTypesToBeWatched": ["*.scala","*.java","*.py", "*.txt"]
+}
+
+
+

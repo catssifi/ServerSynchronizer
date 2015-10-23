@@ -20,15 +20,21 @@ Copyright (c) 2015 Ken Wu
 * 
 */
 
-package com.wwken.serverSynchronizer.file
+package com.wwken.serverSynchronizer
 
-case class RemoteResult(status: String, message: Option[String] = None){
-  override def toString: String = {
-    "status = " + status + message.map(s => "; message = " + s).getOrElse("")
+import com.wwken.serverSynchronizer.config.{ ArgumentsParser, Configuration }
+//import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+object Main {
+
+  def main(args: Array[String]) {
+    
+    //Security.addProvider(new BouncyCastleProvider());
+
+    val arguments = new ArgumentsParser(args)
+
+    new Application(Configuration.load(arguments.configFileName)).run()
+
   }
-}
 
-object RemoteResult {
-  val SUCESS = "sucess"
-  val ERROR = "error"
 }

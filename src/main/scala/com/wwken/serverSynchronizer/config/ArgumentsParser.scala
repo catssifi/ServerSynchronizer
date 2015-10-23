@@ -16,7 +16,7 @@ class ArgumentsParser(args: Array[String]) {
       text "Display this message")
   }
 
-  private val defaultArgumentsConfiguration = ArgumentsConfiguration("config.json")
+  private val defaultArgumentsConfiguration = ArgumentsConfiguration("/etc/ServerSynchronizer/config.json")
   private val argumentsConfiguration = parser.parse(args, defaultArgumentsConfiguration)
 
   if (!argumentsConfiguration.isDefined) System.exit(0)

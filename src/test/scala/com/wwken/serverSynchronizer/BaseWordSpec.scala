@@ -32,6 +32,7 @@ import java.io.File
 class BaseWordSpec extends WordSpec with Log  {
   
   val configuration = Configuration.load("./src/test/resources/test-config-localhost.json")
+  //val configuration = Configuration.load("./src/test/resources/test-config-iq-spark.json")
   val sshManager = new SshManager(configuration)
   
   class InitTest(val conf: Configuration) {
