@@ -11,11 +11,12 @@ For more details and use case, check it out here at <a href="https://wwken.wordp
 
 #### Prerequisites
 
-1) To build the application you need [sbt](http://www.scala-sbt.org/). You can download it from [http://www.scala-sbt.org/download.html](http://www.scala-sbt.org/download.html) website, or you can just find sbt in your favourite package manager (`apt-get`, `yum` or other).
+1) This software has been fully developed and built and run in Mac OS X and Linux Ubuntu 14.10.  It should work in future versions.
 
-2) You still need to have Java Development Kit (JDK) installed. Application should compile on JDK version 1.7+, that can be found [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+2) To build the application you need [sbt](http://www.scala-sbt.org/). You can download it from [http://www.scala-sbt.org/download.html](http://www.scala-sbt.org/download.html) website, or you can just find sbt in your favourite package manager (`apt-get`, `yum` or other).
 
-3) This software is developed and built in Mac OS X and Linux ubuntu. 
+3) You still need to have Java Development Kit (JDK) installed. Application should compile on JDK version 1.7+, that can be found [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
 
 ### Configuring
 
