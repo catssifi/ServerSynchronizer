@@ -29,7 +29,7 @@ import org.apache.commons.io.FileUtils
 object TestUtil extends Log{
   
   def deleteFile(p: String) : Unit = {
-    info("now deleting directory: " + p)
+    debug("now deleting directory: " + p)
     FileUtils.deleteDirectory(new File(p));
   }
   
@@ -37,21 +37,26 @@ object TestUtil extends Log{
     return Files.exists(Paths.get(p))
   }
   
-  // Return false if it just creates 
-  // true if it has already exists
+  // Return false if it already exists 
+  // true if otherwise when trying to create
   def ensureDir(p: String) : Boolean = {
     if (dirExist(p)) {
-      true
+      false
     } else {
       createDir(p)
-      false
     }
   }
   
-  def createDir (p: String) : Unit = {
+  def createDir (p: String) : Boolean = {
     val f = new File(p)
-    if (!dirExist(p)) {
-      f.mkdirs()
+    if (!f.exists()) {
+      debug("In createDir, directory to be created: " + p)
+      val res = f.mkdirs()
+      debug("In createDir, directory : "+p+" created: " + res)
+      res
+    } else {
+      debug("In createDir, directory exists! - " + p)
+      false
     }
   }
   

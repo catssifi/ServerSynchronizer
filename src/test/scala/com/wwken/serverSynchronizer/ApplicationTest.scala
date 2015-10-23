@@ -52,23 +52,46 @@ class ApplicationTest extends BaseWordSpec with Matchers with BeforeAndAfter wit
 
       val testRefreshIntervalInSeconds = configuration.refreshIntervalInSeconds * 10
 
+      
       "This test the file creation logic" in {
 
         //Create a fake local file from source
-        var sfileName = generateFileName()
+        val sfileName = generateFileName()
         //Make sure this fake file does not exist remotely
-        assert(!sshManager.exists(sfileName))
+        assert(!sshManager.exists(sfileName, isThisAFile=true))
 
         info("creating sfileName:" + sfileName)
         initTest.createAFileAndWriteContentToIt(sfileName, "hello This is Ken")
 
-        //Sleep double amount of time to give enough time for the remote synchronization
+        //Sleep enough time for the remote synchronization
         Thread.sleep(testRefreshIntervalInSeconds * 1000)
 
         //Now make sure the remote file exists
-        assert(sshManager.exists(sfileName))
+        assert(sshManager.exists(sfileName, isThisAFile=true))
 
       }
+      
+      
+      "This test the directory creation logic" in {
+        val sDirName = generateDirName()
+        //Make sure this fake directory does not exist remotely
+        assert(!sshManager.exists(sDirName, isThisAFile=false))
+        
+        info("creating sDirName:" + sDirName)
+        initTest.createADir(sDirName)
+        //Make sure this exists locally first
+        assert(initTest.exists(sDirName))
+        
+        //Sleep enough time for the remote synchronization
+        Thread.sleep(testRefreshIntervalInSeconds * 1000)
+
+        //Now make sure the remote file exists
+        assert(sshManager.exists(sDirName, isThisAFile=false))
+
+        
+      }
+      
+
       after {
         //reset(configuration.sourceRoot, "", true)
         //resetRemote()

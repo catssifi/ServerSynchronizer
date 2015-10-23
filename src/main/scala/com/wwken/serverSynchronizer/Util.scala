@@ -5,6 +5,16 @@ import java.io._
 
 object Util {
   
+  def isFile(p: String): Boolean = {
+    val f = new File(p)
+    f.isFile()
+  }
+  
+  def isDirectory(p: String): Boolean = {
+    val f = new File(p)
+    f.isDirectory()
+  }
+  
   def getFileExtension(p: String) : String = {
     val fn = new File(p).getName
     val i = fn.lastIndexOf(".")
@@ -17,7 +27,7 @@ object Util {
   
   def joinPath(p1: String, p2: String) : String = {
     val lastC = p1 takeRight 1
-     if ( lastC == "/") {
+     if ( p1.length() == 0 || lastC == "/") {
        p1 + p2
      } else {
        p1 + "/" + p2

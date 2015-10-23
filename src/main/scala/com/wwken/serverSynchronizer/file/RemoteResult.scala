@@ -5,3 +5,8 @@ case class RemoteResult(status: String, message: Option[String] = None){
     "status = " + status + message.map(s => "; message = " + s).getOrElse("")
   }
 }
+
+object RemoteResult {
+  val SUCESS = "sucess"
+  val ERROR = "error"
+}

@@ -29,7 +29,7 @@ import com.wwken.serverSynchronizer.Util._
 import com.wwken.serverSynchronizer.TestUtil._
 import java.io.File
 
-class BaseWordSpec extends WordSpec {
+class BaseWordSpec extends WordSpec with Log  {
   
   val configuration = Configuration.load("./src/test/resources/test-config-localhost.json")
   val sshManager = new SshManager(configuration)
@@ -38,8 +38,19 @@ class BaseWordSpec extends WordSpec {
     def createAFileAndWriteContentToIt(f: String, c: String): Unit = {
       val sfileName = f
       val sfilePath = Util.joinPath(configuration.sourceRoot, sfileName)
-      //println("sfilePath: " + sfilePath)
+      debug("createAFileAndWriteContentToIt sfilePath: " + sfilePath)
       TestUtil.writeToFile(sfilePath, c)
+    }
+    def createADir(d: String): Unit = {
+      val sfileName = d
+      val sfilePath = Util.joinPath(configuration.sourceRoot, d)
+      val created = TestUtil.createDir(sfilePath)
+      debug("createADir sfilePath: " + sfilePath + ", created: " + created)
+    }
+    def exists(d: String): Boolean = {
+      val sfileName = d
+      val sfilePath = Util.joinPath(configuration.sourceRoot, d)
+      TestUtil.dirExist(sfilePath)
     }
   }
   
@@ -58,9 +69,16 @@ class BaseWordSpec extends WordSpec {
   }
   
   def generateFileName(extenstion: String = "txt") : String = {
-    getClass().getSimpleName()+"-test-" + BaseWordSpec.inc + "." + extenstion
+    getRunningClassName+"-test-" + BaseWordSpec.inc + "." + extenstion
   }
   
+  def generateDirName(parentDir: String = "") : String = {
+    Util.joinPath(parentDir, "dir-"+getRunningClassName)
+  }
+  
+  private def getRunningClassName(): String = {
+    getClass().getSimpleName()
+  } 
 }
 
 object BaseWordSpec {

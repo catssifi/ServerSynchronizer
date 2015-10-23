@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2015 Ken Wu
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+#
+# -----------------------------------------------------------------------------
+#
+# Author: Ken Wu
+# Date: 2015
+* 
+*/
+
 package com.wwken.serverSynchronizer.file.ssh
 
 import com.decodified.scalassh.HostKeyVerifiers.DontVerify
@@ -8,11 +30,6 @@ import com.wwken.serverSynchronizer.config.Configuration
 import com.wwken.serverSynchronizer.file.{ FileSynchronizer, RemoteResult }
 import com.wwken.serverSynchronizer.file.ssh.RichSshClient._
 import com.wwken.serverSynchronizer.Util
-
-/**
- * @author Ken.Wu
- * @since 2015-10-20
- */
 
 class SshManager(val config: Configuration) extends FileSynchronizer with Log {
 
@@ -35,25 +52,26 @@ class SshManager(val config: Configuration) extends FileSynchronizer with Log {
   override def uploadFile(fileToLoad: String): RemoteResult = {
     val source = Util.joinPath(config.sourceRoot, fileToLoad)
     val destination = Util.joinPath(config.destinationRoot, fileToLoad)
-    _uploadFile(source, destination)
+    _updateRemoteFile(source, destination)
   }
 
   override def createDir(dirToCreate: String): RemoteResult = {
-    _uploadFile(null, dirToCreate)
+    val destination = Util.joinPath(config.destinationRoot, dirToCreate)
+    _updateRemoteFile(null, destination)
   }
 
   /*
    * if source is null, then just create the dir only
    */
-  private def _uploadFile(source: String, destination: String): RemoteResult = {
-    info("In _uploadFile, source: "+source+", destination: " + destination)
+  private def _updateRemoteFile(source: String, destination: String): RemoteResult = {
+    info("In _updateRemoteFile, source: "+source+", destination: " + destination)
     connection { client =>
-      client.recursivelyCreatePathIfNotExists(destination)
+      client.recursivelyCreatePathIfNotExists(destination, source!=null)
       if (source!=null)
         client.upload(source, destination)
     } match {
-      case Left(error) => RemoteResult("error", Some(error.toString))
-      case Right(_) => RemoteResult("success")
+      case Left(error) => RemoteResult(RemoteResult.ERROR, Some(error.toString))
+      case Right(_) => RemoteResult(RemoteResult.SUCESS)
     }
   }
 
@@ -76,21 +94,41 @@ class SshManager(val config: Configuration) extends FileSynchronizer with Log {
 
   private def _exec(command: String): RemoteResult = {
     var r = ""
+    var e = ""
     connection { client =>
       client.exec(command).right.map { result =>
         r = result.stdOutAsString()
+        e = result.stdErrAsString()
       }
     }
-    RemoteResult("result", Some(r))
+    info("In _exec, command: "+command + ", result: "+r+", error: "+e)
+    if (e.length()>0){
+      RemoteResult(RemoteResult.ERROR, Some(e))
+    } else {
+      RemoteResult(RemoteResult.SUCESS, Some(r))
+    }
   }
 
-  def exists(file: String): Boolean = {
+  def exists(file: String, isThisAFile: Boolean): Boolean = {
     val lsStr = ls(file)
     lsStr.message match {
-      case Some(x) => x.indexOfSlice(file) > -1
+      case Some(x) => {
+        val lowerX = x.toLowerCase()
+        val fileNotFound = lowerX.contains("no such file or directory")
+        if(isThisAFile) {
+          if (fileNotFound) {
+            false
+          } else {
+            x.indexOfSlice(file) > -1
+          }
+        } else {
+          val emptyResponse = lowerX.length()==0
+          debug("In exists, lowerX: "+lowerX + ", emptyResponse:"+emptyResponse+", fileNotFound:"+fileNotFound)
+          emptyResponse || !fileNotFound
+        }
+      }
       case None => false
     }
-
   }
 }
 

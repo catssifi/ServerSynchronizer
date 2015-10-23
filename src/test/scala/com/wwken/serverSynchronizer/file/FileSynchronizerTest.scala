@@ -42,13 +42,8 @@ class FileSynchronizerTest extends BaseWordSpec with Matchers {
       val sshManager = new SshManager(configuration)
 
       //Make sure the test file is not there
-      if (sshManager.exists(sfileName)) {
-        //println("sfileName:"+sfileName+" exists already..deleting it now...")
-        sshManager.removeFile(sfileName)
-      } else {
-        //println("sfileName:"+sfileName+" does not exists already")
-        assert(!sshManager.exists(sfileName))
-      }
+      sshManager.removeFile(sfileName)
+      assert(!sshManager.exists(sfileName, isThisAFile = true))
 
       //Create a fake local file from source
       initTest.createAFileAndWriteContentToIt(sfileName, "hello This is Ken")
@@ -57,11 +52,9 @@ class FileSynchronizerTest extends BaseWordSpec with Matchers {
       val response = sshManager.uploadFile(sfileName)
 
       //Now file is uploaded, make sure it exists
-      assert(sshManager.exists(sfileName))
+      assert(sshManager.exists(sfileName, isThisAFile = true))
     }
   }
-
-  
 
 }
 

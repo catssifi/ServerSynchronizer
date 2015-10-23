@@ -38,8 +38,6 @@ case class PathEvent(key: WatchKey, event: WatchEvent[_]) extends Log {
     key.watchable().asInstanceOf[Path].resolve(relativePath)
   }
 
-  def appliesToRegularFile = path.toFile.isFile || path.toFile.isDirectory
-
   def kind = event.kind
 }
 
@@ -87,14 +85,13 @@ class FileWatcher(val fileUploader: FileSynchronizer, val sourceRoot: String, va
     while (true) {
       //info("In startWatching - watchedFiles: " + watchedFiles)
       val key = watcher.poll(refreshIntervalsInSeconds, TimeUnit.SECONDS);
-      info("key???: " + key)
+      info("keyyy: " + key)
       if (key != null) {
-        info("key!!!: " + key)
         key.pollEvents()
           .map(PathEvent(key, _))
-          .filter(_.appliesToRegularFile)
           .foreach {
             event =>
+              info("event.path: " + event.path);
               event.kind match {
                 case ENTRY_DELETE =>
                   notifyHandlerAssignedTo(event.path)
