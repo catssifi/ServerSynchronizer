@@ -11,9 +11,11 @@ For more details and use case, check it out here at <a href="https://wwken.wordp
 
 #### Prerequisites
 
-To build the application you need [sbt](http://www.scala-sbt.org/). You can download it from [http://www.scala-sbt.org/download.html](http://www.scala-sbt.org/download.html) website, or you can just find sbt in your favourite package manager (`apt-get`, `yum` or other).
+1) To build the application you need [sbt](http://www.scala-sbt.org/). You can download it from [http://www.scala-sbt.org/download.html](http://www.scala-sbt.org/download.html) website, or you can just find sbt in your favourite package manager (`apt-get`, `yum` or other).
 
-You still need to have Java Development Kit (JDK) installed. Application should compile on JDK version 1.7+, that can be found [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2) You still need to have Java Development Kit (JDK) installed. Application should compile on JDK version 1.7+, that can be found [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
+3) This software is developed and built in Mac OS X and Linux ubuntu. 
 
 ### Configuring
 
@@ -27,12 +29,14 @@ After the above step, you can now run the ServerSynchronizer by issuing the foll
 ```
 Let say, you have this <a href="https://github.com/wwken/ServerSynchronizer/blob/master/src/test/resources/test-config-iq-spark.json" target="_blank">config.json</a> set up in `/etc/ServerSynchronizer`, that means whenever you are editing the files in `/Users/ken/workspace/sparkProjectSrc` , only files with extensions "*.scala" or "*.java" or "*.py" or "*.txt" will get synchronized to the remote host at 'iq-spark' at the folder `/opt/sparkDeployFolder` for every 2 seconds
 
-##### Testing
+###### Optional - Testing
 
-You can run all test cases with this command:
+If you want to modify/enchance this software, make sure you can run all test cases with this command:
 ```bash
 ./test.sh
 ```
+
+The prerequisites are to setup the local ssh server and be able to <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/ssh.1.html" target="_blank">ssh into local host</a> and then specify the hostname, username and keyfile in the test config file at `src/test/resources/test-config-localhost.json` after it is 'git cloned'
 
 ###### Related Articles 
 
