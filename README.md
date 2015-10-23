@@ -5,7 +5,7 @@
 ### This software synchronizes all the files from a local server to all remote server(s) through ssh protocol
 
 #### Why and What?
-Have you ever feel tired of only changing one line of the source file and deploying it to all remote servers manually – such as copy the source and ssh into the remote host and vi that file and paste it and save it?  This operation usually involves at least 6-10 keystrokes but in the long run this does not increase the productivity at all but fatigue and frustrations.  With this software, let say whenever you are editing the source or config files on your local work machine, all those files will get synchronized (i.e. updated) to the remote host(s) AUTOMATICALLY.  Yes, i know every human-being likes the word ‘automatically’!!! :)
+Have you ever feel tired of only changing one line of the source file and deploying it to all remote servers manually – such as copy the source and ssh into the remote host and vi that file and paste it and save it?  This operation usually involves at least 6-10 keystrokes but in the long run this does not increase the productivity at all but fatigue and frustrations.  With this software, let say whenever you are editing the source or config files on your local work machine, all those files will get synchronized (i.e. updated) to the remote host(s) AUTOMATICALLY.  Yes, i know every human-being likes the word ‘automatically’!!! :)  For more details and use case, check it out here at <a href="https://wwken.wordpress.com/2015/10/23/serversynchronizer-the-software-that-synchronizes-all-the-files-from-a-local-server-to-all-remote-servers/" target="_blank">my blog</a>
 
 #### Prerequisites
 
